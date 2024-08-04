@@ -14,3 +14,5 @@ final class TodoErrorState extends TodoState {
   final String error;
   TodoErrorState(this.error);
 }
+
+final class TodoAddedState extends TodoState {}

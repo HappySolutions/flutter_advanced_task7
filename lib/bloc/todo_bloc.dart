@@ -12,6 +12,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   TodoBloc(this._todoRepo) : super(TodoLoadingState()) {
     on<LoadTodosEvent>(loadTodos);
+    on<AddTodosEvent>(addTodos);
   }
 
   FutureOr<void> loadTodos(
@@ -22,5 +23,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     }).catchError((error) {
       emit(TodoErrorState(error.toString()));
     });
+  }
+
+  FutureOr<void> addTodos(AddTodosEvent event, Emitter<TodoState> emit) async {
+    var todo = Todos.fromJson({
+      "id": 6,
+      "title": "Test todo",
+      "description": "test todo description",
+      "is_complete": false
+    });
+    TodoRepo.todosList.add(todo);
+    var newList = TodoRepo.todosList;
+    emit(TodoLoadedState(newList));
   }
 }

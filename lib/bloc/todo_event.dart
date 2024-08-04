@@ -4,3 +4,5 @@ part of 'todo_bloc.dart';
 sealed class TodoEvent {}
 
 class LoadTodosEvent extends TodoEvent {}
+
+class AddTodosEvent extends TodoEvent {}

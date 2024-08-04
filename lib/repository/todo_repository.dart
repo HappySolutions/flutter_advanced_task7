@@ -5,8 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced_task7/models/todos.dart';
 
 class TodoRepo {
+  static List<Todos> todosList = [];
   Future<List<Todos>> getTodos() async {
-    List<Todos> todosList = [];
+    // List<Todos> todosList = [];
 
     try {
       var data = await rootBundle.loadString("assets/data.json");

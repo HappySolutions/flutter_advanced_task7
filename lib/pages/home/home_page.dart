@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task7/bloc/todo_bloc.dart';
+import 'package:flutter_advanced_task7/pages/edit_todo/edit_todo_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +24,9 @@ class _HomePageState extends State<HomePage> {
         title: const Center(child: Text('Todo List')),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<TodoBloc>().add(AddTodosEvent());
+        },
         child: const Icon(Icons.add),
       ),
       body: Center(
