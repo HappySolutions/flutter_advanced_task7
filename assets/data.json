@@ -1,0 +1,36 @@
+{
+   "code": 200,
+   "status": "OK",
+   "todos":[
+    {
+      "id" : 1,
+      "title": "Polymer",
+      "description": "Learn about Polymer",
+      "is_complete" : true
+    },
+    {
+      "id" : 2,
+      "title" : "Pluralsight",
+      "description": "Watch Pluralsight course on Docker",
+      "is_complete" : true
+    },
+    {
+      "id" : 3,
+      "title" : "presentation",
+      "description": "Complete presentation prep for Aurelia presentation",
+      "is_complete" : false
+    },
+    {
+      "id" : 4,
+      "title": "Instrument",
+      "description": "Instrument creation of development environment with Puppet",
+      "is_complete" : false
+    },
+    {
+      "id" : 5,
+      "title": "code",
+      "description": "Transition code base to ES6",
+      "is_complete" : true
+    }
+  ]
+}
