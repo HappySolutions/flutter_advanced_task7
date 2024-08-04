@@ -1,17 +1,29 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_task7/models/todos.dart';
 
 class TodoRepo {
   Future<List<Todos>> getTodos() async {
+    List<Todos> todosList = [];
+
     try {
-      var result = await rootBundle.loadString("assets/data.json");
-      var todos = json.decode(result);
-      return List<Todos>.from(
-          todos.map((json) => Todos.fromJson(json)).toList());
+      var data = await rootBundle.loadString("assets/data.json");
+      var result = json.decode(data);
+      if (result['status'] == 'OK') {
+        todosList = List<Todos>.from(
+            result['todos'].map((json) => Todos.fromJson(json)).toList());
+        if (todosList.isNotEmpty) {
+          log(todosList.toString());
+        } else {
+          log('=====>error on getting todos');
+        }
+        return todosList;
+      }
     } catch (e) {
       rethrow;
     }
+    return todosList;
   }
 }

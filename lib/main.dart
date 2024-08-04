@@ -1,13 +1,19 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_task7/bloc/todo_bloc.dart';
 import 'package:flutter_advanced_task7/pages/homepage/home_page.dart';
+import 'package:flutter_advanced_task7/repository/todo_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp(), // Wrap your app
+    BlocProvider<TodoBloc>(
+      create: (context) => TodoBloc(TodoRepo()),
+      child: DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const MyApp(),
+      ),
     ),
   );
 }
