@@ -67,15 +67,19 @@ class _AddTodoPageState extends State<AddTodoPage> {
                     "is_complete": false
                   });
                   context.read<TodoBloc>().add(AddTodoEvent(todo));
-                  Navigator.pop(context);
                 },
                 child: BlocBuilder<TodoBloc, TodoState>(
+                  buildWhen: (prev, curr) => curr is TodoAddedState,
                   builder: (context, state) {
                     if (state is TodoAddingLoadingState) {
                       return const CircularProgressIndicator();
                     }
                     if (state is TodoAddingErrorState) {
                       return Text('Message: ${state.error}');
+                    }
+                    if (state is TodoAddingSuccessfulyState) {
+                      Navigator.pop(context);
+                      return const SizedBox.shrink();
                     }
                     return const Text('Add Todo');
                   },
