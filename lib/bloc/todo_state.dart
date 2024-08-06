@@ -3,16 +3,30 @@ part of 'todo_bloc.dart';
 @immutable
 sealed class TodoState {}
 
-final class TodoLoadingState extends TodoState {}
+@immutable
+sealed class TodoAddedState extends TodoState {}
 
-final class TodoLoadedState extends TodoState {
+final class TodosLoadingState extends TodoState {}
+
+final class TodosLoadedState extends TodoState {
   final List<Todos> todos;
-  TodoLoadedState(this.todos);
+  TodosLoadedState(this.todos);
 }
 
-final class TodoErrorState extends TodoState {
+final class TodosErrorState extends TodoState {
   final String error;
-  TodoErrorState(this.error);
+  TodosErrorState(this.error);
 }
 
-final class TodoAddedState extends TodoState {}
+// Adding Todo satats
+
+final class TodoAddingState extends TodoAddedState {}
+
+final class TodoAddingLoadingState extends TodoAddedState {}
+
+final class TodoAddingSuccessfulyState extends TodoAddedState {}
+
+final class TodoAddingErrorState extends TodoAddedState {
+  final String error;
+  TodoAddingErrorState(this.error);
+}

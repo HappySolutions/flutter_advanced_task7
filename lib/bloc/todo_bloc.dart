@@ -10,30 +10,28 @@ part 'todo_state.dart';
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepo _todoRepo;
 
-  TodoBloc(this._todoRepo) : super(TodoLoadingState()) {
+  TodoBloc(this._todoRepo) : super(TodosLoadingState()) {
     on<LoadTodosEvent>(loadTodos);
-    on<AddTodosEvent>(addTodos);
+    on<AddTodoEvent>(addTodos);
   }
 
   FutureOr<void> loadTodos(
       LoadTodosEvent event, Emitter<TodoState> emit) async {
-    emit(TodoLoadingState());
+    emit(TodosLoadingState());
     await _todoRepo.getTodos().then((todos) {
-      emit(TodoLoadedState(todos));
+      emit(TodosLoadedState(todos));
     }).catchError((error) {
-      emit(TodoErrorState(error.toString()));
+      emit(TodosErrorState(error.toString()));
     });
   }
 
-  FutureOr<void> addTodos(AddTodosEvent event, Emitter<TodoState> emit) async {
-    var todo = Todos.fromJson({
-      "id": 6,
-      "title": "Test todo",
-      "description": "test todo description",
-      "is_complete": false
-    });
-    TodoRepo.todosList.add(todo);
+  FutureOr<void> addTodos(AddTodoEvent event, Emitter<TodoState> emit) async {
+    emit(TodoAddingLoadingState());
+    await Future.delayed(const Duration(seconds: 2));
+    TodoRepo.todosList.add(event.todo);
     var newList = TodoRepo.todosList;
-    emit(TodoLoadedState(newList));
+
+    emit(TodosLoadedState(newList));
+    emit(TodoAddingSuccessfulyState());
   }
 }

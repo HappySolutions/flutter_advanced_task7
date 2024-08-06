@@ -5,4 +5,7 @@ sealed class TodoEvent {}
 
 class LoadTodosEvent extends TodoEvent {}
 
-class AddTodosEvent extends TodoEvent {}
+class AddTodoEvent extends TodoEvent {
+  final Todos todo;
+  AddTodoEvent(this.todo);
+}
